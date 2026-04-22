@@ -5,12 +5,12 @@ from __future__ import annotations
 import asyncio
 import random
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 from dgx_gp_spark_sim.config import NetworkConfig
 
 
-class LinkType(str, Enum):
+class LinkType(StrEnum):
     """Type of network link."""
 
     EDGE_EDGE = "edge_edge"

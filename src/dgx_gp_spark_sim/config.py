@@ -18,7 +18,9 @@ class DGXSparkConfig(BaseModel):
     memory_bandwidth_gbps: float = Field(default=273.0, description="Memory bandwidth in GB/s")
     nvme_capacity_tb: float = Field(default=4.0, description="Local NVMe storage in TB")
     nic_bandwidth_gbps: float = Field(default=200.0, description="ConnectX-7 NIC bandwidth in Gbps")
-    max_concurrent_batches: int = Field(default=8, description="Max concurrent micro-batches on GPU")
+    max_concurrent_batches: int = Field(
+        default=8, description="Max concurrent micro-batches on GPU"
+    )
     batch_curve_points: list[list[float]] = Field(
         default=[[1, 1.0], [4, 0.85], [8, 0.75], [16, 0.65], [32, 0.55]],
         description="[batch_size, efficiency] interpolation points",

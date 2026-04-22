@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import Any, AsyncIterator
+from typing import Any
 
 from fastapi import FastAPI, HTTPException
 
-from dgx_gp_spark_sim.config import EdgeUnitConfig, load_config
+from dgx_gp_spark_sim.config import EdgeUnitConfig
 from dgx_gp_spark_sim.edge_unit.node import EdgeUnitNode
 from dgx_gp_spark_sim.models import (
     AuditEntry,
@@ -20,6 +21,7 @@ from dgx_gp_spark_sim.models import (
     Task,
     TaskResult,
 )
+
 
 def create_app(config: EdgeUnitConfig | None = None) -> FastAPI:
     """Create and return a configured FastAPI application.

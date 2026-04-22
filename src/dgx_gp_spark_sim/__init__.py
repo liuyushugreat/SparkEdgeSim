@@ -10,13 +10,13 @@ frameworks such as SkyGrid or any custom edge computing platform.
 
 __version__ = "0.1.0"
 
+from dgx_gp_spark_sim.client import EdgeUnitClient
 from dgx_gp_spark_sim.models import (
     BatchRequest,
     BatchResult,
     Task,
     TaskResult,
 )
-from dgx_gp_spark_sim.client import EdgeUnitClient
 
 __all__ = [
     "Task",

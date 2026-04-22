@@ -6,7 +6,7 @@ import asyncio
 import hashlib
 import time
 from collections import OrderedDict
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from dgx_gp_spark_sim.config import GPSparkConfig

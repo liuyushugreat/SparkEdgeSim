@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import asyncio
 import heapq
-import time
+from collections.abc import Callable, Coroutine
 from dataclasses import dataclass, field
-from enum import Enum
-from typing import Any, Callable, Coroutine
+from enum import StrEnum
+from typing import Any
 
 
-class EventType(str, Enum):
+class EventType(StrEnum):
     """Types of simulation events."""
 
     TASK_ARRIVE = "task_arrive"

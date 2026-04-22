@@ -5,14 +5,14 @@ from __future__ import annotations
 import asyncio
 import heapq
 import time
+from collections.abc import Callable
 from dataclasses import dataclass, field
-from enum import Enum
-from typing import Callable
+from enum import StrEnum
 
 from dgx_gp_spark_sim.models import Task
 
 
-class SchedulerPolicy(str, Enum):
+class SchedulerPolicy(StrEnum):
     """Built-in scheduling policies."""
 
     FIFO = "fifo"

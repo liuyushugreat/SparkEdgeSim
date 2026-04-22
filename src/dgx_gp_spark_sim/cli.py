@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import typer
 from rich.console import Console
@@ -19,7 +18,7 @@ console = Console()
 
 @app.command()
 def serve(
-    config: Optional[Path] = typer.Option(  # noqa: UP007
+    config: Path | None = typer.Option(  # noqa: UP007
         None, "--config", "-c", help="Path to YAML configuration file"
     ),
     host: str = typer.Option("0.0.0.0", "--host", "-h", help="Bind address"),
@@ -34,9 +33,21 @@ def serve(
 
     cfg = load_config(config) if config else EdgeUnitConfig()
     console.print(f"[bold green]Starting SparkEdgeSim[/] unit=[cyan]{cfg.unit_id}[/]")
-    console.print(f"  Compute: {cfg.dgx_spark.gpu_tflops} TFLOPS | {cfg.dgx_spark.unified_memory_gb} GB unified memory")
-    console.print(f"  Storage: {cfg.gp_spark.iops:,} IOPS | {cfg.gp_spark.storage_bandwidth_gbps} GB/s")
-    console.print(f"  Network: {cfg.network.bandwidth_gbps} Gbps | RTT edge-edge {cfg.network.edge_edge_rtt_ms} ms")
+    ds = cfg.dgx_spark
+    console.print(
+        f"  Compute: {ds.gpu_tflops} TFLOPS"
+        f" | {ds.unified_memory_gb} GB unified memory"
+    )
+    gp = cfg.gp_spark
+    console.print(
+        f"  Storage: {gp.iops:,} IOPS"
+        f" | {gp.storage_bandwidth_gbps} GB/s"
+    )
+    net = cfg.network
+    console.print(
+        f"  Network: {net.bandwidth_gbps} Gbps"
+        f" | RTT edge-edge {net.edge_edge_rtt_ms} ms"
+    )
     console.print(f"  Listening on [bold]{host}:{port}[/]")
 
     fastapi_app = create_app(cfg)
@@ -46,7 +57,7 @@ def serve(
 @app.command()
 def run_example(
     name: str = typer.Argument("single_task", help="Example name to run"),
-    config: Optional[Path] = typer.Option(None, "--config", "-c"),  # noqa: UP007
+    config: Path | None = typer.Option(None, "--config", "-c"),  # noqa: UP007
 ) -> None:
     """Run a built-in example scenario."""
     import asyncio
@@ -115,7 +126,7 @@ def run_example(
 def benchmark(
     tasks: int = typer.Option(1000, "--tasks", "-n", help="Number of tasks"),
     batch_size: int = typer.Option(1, "--batch-size", "-b", help="Batch size (1 = no batching)"),
-    config: Optional[Path] = typer.Option(None, "--config", "-c"),  # noqa: UP007
+    config: Path | None = typer.Option(None, "--config", "-c"),  # noqa: UP007
 ) -> None:
     """Run a simple throughput benchmark."""
     import asyncio
@@ -146,7 +157,7 @@ def benchmark(
                 await node.submit_batch(batch)
 
         elapsed = time.monotonic() - t0
-        console.print(f"\n[bold green]Benchmark complete[/]")
+        console.print("\n[bold green]Benchmark complete[/]")
         console.print(f"  Tasks: {tasks}")
         console.print(f"  Batch size: {batch_size}")
         console.print(f"  Elapsed: {elapsed:.3f} s")
