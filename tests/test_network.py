@@ -25,9 +25,11 @@ def test_edge_cloud_higher_than_edge_edge(network: NetworkModel) -> None:
     assert lat_ec > lat_ee * 0.5  # allow jitter margin
 
 
-def test_larger_message_takes_longer(network: NetworkModel) -> None:
-    lat_small = network.estimate_transfer_ms(100, LinkType.EDGE_EDGE)
-    lat_large = network.estimate_transfer_ms(1_000_000, LinkType.EDGE_EDGE)
+def test_larger_message_takes_longer() -> None:
+    cfg = NetworkConfig(jitter_ms=0.0)
+    net = NetworkModel(cfg)
+    lat_small = net.estimate_transfer_ms(100, LinkType.EDGE_EDGE)
+    lat_large = net.estimate_transfer_ms(1_000_000, LinkType.EDGE_EDGE)
     assert lat_large > lat_small
 
 
