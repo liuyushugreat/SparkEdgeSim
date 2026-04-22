@@ -1,0 +1,15 @@
+# GP Spark Default Storage Profile
+# Based on GP Spark NVMe-oF storage node specifications
+#
+# NOTE: This is a parameterized simulation profile, not an exact hardware replica.
+
+max_ssd_count: 4             # Up to 4× M.2 NVMe SSDs
+ssd_capacity_tb: 8.0        # Per-SSD capacity
+storage_bandwidth_gbps: 11.6  # Aggregate throughput (~11.6 GB/s)
+iops: 2700000                # Peak IOPS (2.7M)
+read_latency_us: 20.0       # End-to-end read latency < 20 µs
+write_latency_us: 25.0      # Estimated write latency
+rdma_enabled: true           # RDMA (RoCEv2) hardware offload
+gds_enabled: true            # GPUDirect Storage support
+nvmeof_enabled: true         # NVMe-oF protocol
+power_watts: 100.0           # Total power consumption < 100W

@@ -1,0 +1,20 @@
+# DGX Spark Default Hardware Profile
+# Based on NVIDIA DGX Spark specifications (Grace Blackwell architecture)
+#
+# NOTE: This is a parameterized simulation profile, not an exact hardware replica.
+
+gpu_tflops: 1000.0          # Peak tensor performance (~1 PFLOP FP8/FP4)
+cpu_cores: 20               # 10× Cortex-X925 + 10× Cortex-A725
+unified_memory_gb: 128.0    # LPDDR5x coherent unified memory
+memory_bandwidth_gbps: 273.0  # Up to 273 GB/s
+nvme_capacity_tb: 4.0       # 4 TB NVMe M.2 with self-encryption
+nic_bandwidth_gbps: 200.0   # ConnectX-7 NIC @ 200 Gbps
+max_concurrent_batches: 8   # Concurrent GPU micro-batches
+batch_curve_points:          # [batch_size, efficiency] interpolation
+  - [1, 1.0]
+  - [4, 0.85]
+  - [8, 0.75]
+  - [16, 0.65]
+  - [32, 0.55]
+power_watts: 240.0           # TDP
+compute_overhead_ms: 0.05    # Kernel launch overhead

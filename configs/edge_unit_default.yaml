@@ -1,0 +1,50 @@
+# Default Edge Unit Configuration
+# Combines DGX Spark compute + GP Spark storage + network
+
+unit_id: "edge-unit-0"
+scheduler_policy: "fifo"
+queue_capacity: 1024
+staleness_bound_ms: 500.0
+microbatch_max: 16
+microbatch_timeout_ms: 10.0
+local_cache_capacity: 10000
+warm_state_capacity: 100000
+failure_rate: 0.0
+recovery_time_ms: 500.0
+
+dgx_spark:
+  gpu_tflops: 1000.0
+  cpu_cores: 20
+  unified_memory_gb: 128.0
+  memory_bandwidth_gbps: 273.0
+  nvme_capacity_tb: 4.0
+  nic_bandwidth_gbps: 200.0
+  max_concurrent_batches: 8
+  batch_curve_points:
+    - [1, 1.0]
+    - [4, 0.85]
+    - [8, 0.75]
+    - [16, 0.65]
+    - [32, 0.55]
+  power_watts: 240.0
+  compute_overhead_ms: 0.05
+
+gp_spark:
+  max_ssd_count: 4
+  ssd_capacity_tb: 8.0
+  storage_bandwidth_gbps: 11.6
+  iops: 2700000
+  read_latency_us: 20.0
+  write_latency_us: 25.0
+  rdma_enabled: true
+  gds_enabled: true
+  nvmeof_enabled: true
+  power_watts: 100.0
+
+network:
+  edge_edge_rtt_ms: 2.0
+  edge_cloud_rtt_ms: 20.0
+  bandwidth_gbps: 10.0
+  jitter_ms: 0.5
+  packet_overhead_bytes: 64
+  congestion_factor: 1.0

@@ -1,0 +1,49 @@
+# Lightweight Edge Unit Configuration
+# For resource-constrained deployments — smaller queues, conservative batching,
+# single SSD, lower network bandwidth.
+
+unit_id: "edge-unit-lite-0"
+scheduler_policy: "fifo"
+queue_capacity: 256
+staleness_bound_ms: 1000.0
+microbatch_max: 4
+microbatch_timeout_ms: 20.0
+local_cache_capacity: 2000
+warm_state_capacity: 20000
+failure_rate: 0.0
+recovery_time_ms: 1000.0
+
+dgx_spark:
+  gpu_tflops: 1000.0
+  cpu_cores: 20
+  unified_memory_gb: 128.0
+  memory_bandwidth_gbps: 273.0
+  nvme_capacity_tb: 4.0
+  nic_bandwidth_gbps: 100.0
+  max_concurrent_batches: 4
+  batch_curve_points:
+    - [1, 1.0]
+    - [2, 0.90]
+    - [4, 0.80]
+  power_watts: 200.0
+  compute_overhead_ms: 0.1
+
+gp_spark:
+  max_ssd_count: 1
+  ssd_capacity_tb: 2.0
+  storage_bandwidth_gbps: 3.5
+  iops: 800000
+  read_latency_us: 30.0
+  write_latency_us: 40.0
+  rdma_enabled: false
+  gds_enabled: false
+  nvmeof_enabled: true
+  power_watts: 50.0
+
+network:
+  edge_edge_rtt_ms: 5.0
+  edge_cloud_rtt_ms: 50.0
+  bandwidth_gbps: 1.0
+  jitter_ms: 2.0
+  packet_overhead_bytes: 64
+  congestion_factor: 1.2

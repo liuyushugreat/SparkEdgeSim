@@ -1,0 +1,52 @@
+# High-Density Edge Unit Configuration
+# Optimized for dense UAM deployments — higher queue, aggressive batching,
+# tighter network RTT for co-located edge clusters.
+
+unit_id: "edge-unit-hd-0"
+scheduler_policy: "priority"
+queue_capacity: 4096
+staleness_bound_ms: 200.0
+microbatch_max: 32
+microbatch_timeout_ms: 5.0
+local_cache_capacity: 50000
+warm_state_capacity: 500000
+failure_rate: 0.001
+recovery_time_ms: 300.0
+
+dgx_spark:
+  gpu_tflops: 1000.0
+  cpu_cores: 20
+  unified_memory_gb: 128.0
+  memory_bandwidth_gbps: 273.0
+  nvme_capacity_tb: 4.0
+  nic_bandwidth_gbps: 200.0
+  max_concurrent_batches: 16
+  batch_curve_points:
+    - [1, 1.0]
+    - [4, 0.90]
+    - [8, 0.82]
+    - [16, 0.72]
+    - [32, 0.60]
+    - [64, 0.50]
+  power_watts: 240.0
+  compute_overhead_ms: 0.03
+
+gp_spark:
+  max_ssd_count: 4
+  ssd_capacity_tb: 8.0
+  storage_bandwidth_gbps: 11.6
+  iops: 2700000
+  read_latency_us: 18.0
+  write_latency_us: 22.0
+  rdma_enabled: true
+  gds_enabled: true
+  nvmeof_enabled: true
+  power_watts: 100.0
+
+network:
+  edge_edge_rtt_ms: 0.5
+  edge_cloud_rtt_ms: 15.0
+  bandwidth_gbps: 25.0
+  jitter_ms: 0.2
+  packet_overhead_bytes: 64
+  congestion_factor: 1.0
