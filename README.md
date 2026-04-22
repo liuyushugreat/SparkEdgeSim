@@ -2,7 +2,7 @@
 
 **Interface-compatible, parameterized, hardware-aware edge compute unit simulator for DGX Spark & GP Spark.**
 
-> **Disclaimer**: SparkEdgeSim is a *parameterized simulation/emulation platform* designed for distributed systems research. It is **not** a one-to-one official hardware replica of NVIDIA DGX Spark or Green Computing Technology GP Spark. All hardware parameters are derived from publicly available specifications and are configurable for research purposes.
+> **Disclaimer**: SparkEdgeSim is a *parameterized simulation/emulation platform* designed for distributed systems research. It is **not** a one-to-one official hardware replica of NVIDIA DGX Spark or Guangdong Luisuan Technology GP Spark. All hardware parameters are derived from publicly available specifications and are configurable for research purposes.
 
 ---
 
@@ -63,6 +63,10 @@ The simulator exposes a stable REST API and Python SDK, enabling seamless integr
 
 The NVIDIA DGX Spark is based on the Grace Blackwell architecture, designed to bring petaflop-class AI computing to a desktop form factor.
 
+<p align="center">
+  <img src="docs/images/DGXSpark.png" alt="NVIDIA DGX Spark" width="480">
+</p>
+
 | Specification | Value |
 |---|---|
 | Architecture | NVIDIA Grace Blackwell |
@@ -80,9 +84,13 @@ The NVIDIA DGX Spark is based on the Grace Blackwell architecture, designed to b
 | Weight | 1.2 kg |
 | OS | NVIDIA DGX OS |
 
-### GP Spark (Green Computing Technology)
+### GP Spark (Guangdong Luisuan Technology)
 
 GP Spark is a data center-grade NVMe-oF storage node that integrates RDMA (RoCEv2) and NVMe-oF protocol stacks into a dedicated hardware offload engine for end-to-end data acceleration.
+
+<p align="center">
+  <img src="docs/images/GPSpark.png" alt="GP Spark" width="480">
+</p>
 
 | Specification | Value |
 |---|---|
